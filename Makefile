@@ -1,24 +1,59 @@
-CC = g++
-CFLAGS = -std=c++11 -Wall -g
-TARGET = main
-OBJ = binarymaxheap.o demo.o test.o
+# Compiler settings
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra -g
+LDFLAGS =
 
-all: $(TARGET)
+# Executables
+MAIN_EXEC = main
+TEST_EXEC = test
 
-$(TARGET): $(OBJ)
-	$(CC) $(OBJ) -o $(TARGET)
+# Source files
+MAIN_SRC = demo.cpp
+TEST_SRC = test.cpp
+HEAP_SRC = binarymaxheap.cpp
 
-binarymaxheap.o: binarymaxheap.cpp binarymaxheap.h
-	$(CC) $(CFLAGS) -c binarymaxheap.cpp
+# Object files
+MAIN_OBJ = demo.o binarymaxheap.o
+TEST_OBJ = test.o binarymaxheap.o
 
-demo.o: demo.cpp binarymaxheap.h
-	$(CC) $(CFLAGS) -c demo.cpp
+# All targets
+all: $(MAIN_EXEC)
 
-test.o: test.cpp binarymaxheap.h
-	$(CC) $(CFLAGS) -c test.cpp
+# Main executable build
+$(MAIN_EXEC): $(MAIN_OBJ)
+	$(CXX) $(CXXFLAGS) $(MAIN_OBJ) -o $(MAIN_EXEC) $(LDFLAGS)
 
-run: $(TARGET)
-	./$(TARGET)
+# Test executable build
+$(TEST_EXEC): $(TEST_OBJ)
+	$(CXX) $(CXXFLAGS) $(TEST_OBJ) -o $(TEST_EXEC) $(LDFLAGS)
 
+# Main program object files
+$(MAIN_OBJ): $(MAIN_SRC) binarymaxheap.h
+	$(CXX) $(CXXFLAGS) -c $(MAIN_SRC)
+
+# Test program object files
+$(TEST_OBJ): $(TEST_SRC) binarymaxheap.h
+	$(CXX) $(CXXFLAGS) -c $(TEST_SRC)
+
+# Run the main program
+run: $(MAIN_EXEC)
+	./$(MAIN_EXEC)
+
+# Build and run the main program
+build_run: $(MAIN_EXEC)
+	./$(MAIN_EXEC)
+
+# Build the test executable
+test_build: $(TEST_EXEC)
+
+# Run the test executable
+test_run: $(TEST_EXEC)
+	./$(TEST_EXEC)
+
+# Build and run the test executable
+test_build_run: $(TEST_EXEC)
+	./$(TEST_EXEC)
+
+# Clean generated files
 clean:
-	rm -f $(OBJ) $(TARGET) test_binarymaxheap_output.txt
+	rm -f $(MAIN_EXEC) $(TEST_EXEC) $(MAIN_OBJ) $(TEST_OBJ) test_binarymaxheap_output.txt
