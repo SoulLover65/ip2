@@ -80,9 +80,9 @@ namespace ip2
         MaxHeap& operator/=(const MaxHeap& other);
 
         // Element operators
-        MaxHeap& operator+(int value);  // Add a single element
-        MaxHeap& operator++();          // Insert the same element
-        MaxHeap& operator-(int value);  // Remove the specific element
+        MaxHeap& operator+();          // Add a single element at the end
+        MaxHeap& operator++();          // Insert the root element again
+        MaxHeap& operator-();           // Remove a single element at the end
         MaxHeap& operator--();          // Remove the root element
 
         // Comparison operators

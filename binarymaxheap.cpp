@@ -147,6 +147,8 @@ namespace ip2
         return 2 * index + 2;
     }
 
+    // ---------------------- Arithmetic Operators ----------------------
+
     // Merge the two heaps (union of elements)
     MaxHeap MaxHeap::operator+(const MaxHeap& other)
     {
@@ -298,4 +300,121 @@ namespace ip2
 
         return *this;
     }
+
+    // ---------------------- Element Operators ----------------------
+
+    // `operator+()` - Add a default element (0) at the end of the heap
+    MaxHeap& MaxHeap::operator+()
+    {
+        insert(0);  // Use insert method to add the element
+        return *this;
+    }
+
+    // `operator++()` - Insert the root element again (duplicate the root element)
+    MaxHeap& MaxHeap::operator++()
+    {
+        if (!impl->heap.empty())
+        {
+            insert(impl->heap[0]);  // Insert the root element (maximum element) again
+        }
+        else
+        {
+            throw MaxHeapException();  // If the heap is empty, throw an exception
+        }
+        return *this;
+    }
+
+    // `operator-()` - Remove a single element at the end of the heap
+    MaxHeap& MaxHeap::operator-()
+    {
+        if (!impl->heap.empty())
+        {
+            impl->heap.pop_back();  // Remove the last element
+        }
+        else
+        {
+            throw MaxHeapException();  // If the heap is empty, throw an exception
+        }
+        return *this;
+    }
+
+    // `operator--()` - Remove the root element (maximum element)
+    MaxHeap& MaxHeap::operator--()
+    {
+        if (!impl->heap.empty())
+        {
+            removeMax();  // Remove the root (maximum) element
+        }
+        else
+        {
+            throw MaxHeapException();  // If the heap is empty, throw an exception
+        }
+        return *this;
+    }
+
+    // ---------------------- Comparison Operators ----------------------
+
+    // `operator==()` - Checks if the heaps are identical (have the same elements in the same order)
+    bool MaxHeap::operator==(const MaxHeap& other) const
+    {
+        // Check if the sizes are the same and the elements are identical
+        return this->size() == other.size() && impl->heap == other.impl->heap;
+    }
+
+    // `operator!=()` - Checks if the heaps are not identical
+    bool MaxHeap::operator!=(const MaxHeap& other) const
+    {
+        // Return true if the heaps are not identical
+        return !(*this == other);  // Simply using operator== for the inverse check
+    }
+
+    // `operator<()` - Checks if the left heap has fewer elements than the right one
+    bool MaxHeap::operator<(const MaxHeap& other) const
+    {
+        // Compare the sizes of the heaps
+        return this->size() < other.size();
+    }
+
+    // `operator>()` - Checks if the left heap has more elements than the right one
+    bool MaxHeap::operator>(const MaxHeap& other) const
+    {
+        // Compare the sizes of the heaps
+        return this->size() > other.size();
+    }
+
+    // `operator<=()` - Checks if the left heap has equal amount or fewer elements than the right one
+    bool MaxHeap::operator<=(const MaxHeap& other) const
+    {
+        // Compare the sizes of the heaps
+        return this->size() <= other.size();
+    }
+
+    // `operator>=()` - Checks if the left heap has equal amount or more elements than the right one
+    bool MaxHeap::operator>=(const MaxHeap& other) const
+    {
+        // Compare the sizes of the heaps
+        return this->size() >= other.size();
+    }
+
+    // ---------------------- Other Operators ----------------------
+
+    // `operator!()` - Clears the heap
+    bool MaxHeap::operator!()
+    {
+        impl->heap.clear();  // Clear the underlying heap vector
+        return true;         // Return true to indicate the heap was cleared
+    }
+
+    // `operator[]` - Access element by index
+    int MaxHeap::operator[](int index)
+    {
+        if (index < 0 || index >= impl->heap.size())
+        {
+            throw std::out_of_range("Index is out of range");  // Ensure the index is valid
+        }
+
+        return impl->heap[index];  // Return the element at the specified index
+    }
+
+
 }
