@@ -1,3 +1,14 @@
+//Makefile commands:
+// make — Builds everything
+// make build — Builds the main executable
+// make run — Runs the main executable
+// make build_run — Builds and runs the main executable
+// make test_build — Builds the test executable
+// make test_run — Runs the test executable
+// make test_build_run — Builds and runs the test executable
+// make clean — Cleans all generated files
+
+
 #ifndef BINARYMAXHEAP_H_INCLUDED
 #define BINARYMAXHEAP_H_INCLUDED
 
