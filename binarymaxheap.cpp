@@ -1,5 +1,7 @@
 #include "your_structure.hpp"
 
+#include <algorithm>
+
 namespace ip2
 {
     MaxHeap::MaxHeap()
@@ -128,19 +130,19 @@ namespace ip2
     }
 
     // Helper function to get the parent index
-    int Structure::parent(int index)
+    int MaxHeap::parent(int index)
     {
         return (index - 1) / 2;
     }
 
     // Helper function to get the left child index
-    int Structure::leftChild(int index)
+    int MaxHeap::leftChild(int index)
     {
         return 2 * index + 1;
     }
 
     // Helper function to get the right child index
-    int Structure::rightChild(int index)
+    int MaxHeap::rightChild(int index)
     {
         return 2 * index + 2;
     }
