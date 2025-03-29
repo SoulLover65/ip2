@@ -147,5 +147,155 @@ namespace ip2
         return 2 * index + 2;
     }
 
+    // Merge the two heaps (union of elements)
+    MaxHeap MaxHeap::operator+(const MaxHeap& other)
+    {
+        MaxHeap result = *this;  // Start with the current heap (copy of this)
 
+        // Add elements from the other heap
+        for (int value : other.impl->heap)
+        {
+            result.insert(value);
+        }
+
+        return result;
+    }
+
+    // Merge the two heaps and update the current heap
+    MaxHeap& MaxHeap::operator+=(const MaxHeap& other)
+    {
+        // Add elements from the other heap to this heap
+        for (int value : other.impl->heap)
+        {
+            insert(value);
+        }
+
+        return *this;
+    }
+
+    // Remove elements from the first heap that the second heap also has
+    MaxHeap MaxHeap::operator-(const MaxHeap& other)
+    {
+        MaxHeap result;
+
+        for (int value : impl->heap)
+        {
+            // Only add elements to result if they are not in the other heap
+            if (std::find(other.impl->heap.begin(), other.impl->heap.end(), value) == other.impl->heap.end())
+            {
+                result.insert(value);
+            }
+        }
+
+        return result;
+    }
+
+    // Remove elements from the current heap that the second heap also has
+    MaxHeap& MaxHeap::operator-=(const MaxHeap& other)
+    {
+        std::vector<int> newHeap;
+
+        for (int value : impl->heap)
+        {
+            if (std::find(other.impl->heap.begin(), other.impl->heap.end(), value) == other.impl->heap.end())
+            {
+                newHeap.push_back(value);
+            }
+        }
+
+        impl->heap = newHeap;
+        heapifyDown(0);  // Re-establish the heap property
+        return *this;
+    }
+
+    MaxHeap MaxHeap::operator*(const MaxHeap& other)
+    {
+        MaxHeap result;
+
+        for (int value : impl->heap)
+        {
+            // Add value to result if it's present in both heaps
+            if (std::find(other.impl->heap.begin(), other.impl->heap.end(), value) != other.impl->heap.end())
+            {
+                result.insert(value);
+            }
+        }
+
+        return result;
+    }
+
+    // Modify the heap to leave only the intersection of the two heaps
+    MaxHeap& MaxHeap::operator*=(const MaxHeap& other)
+    {
+        std::vector<int> newHeap;
+
+        for (int value : impl->heap)
+        {
+            if (std::find(other.impl->heap.begin(), other.impl->heap.end(), value) != other.impl->heap.end())
+            {
+                newHeap.push_back(value);
+            }
+        }
+
+        impl->heap = newHeap;
+        heapifyDown(0);  // Re-establish the heap property
+        return *this;
+    }
+
+    // Leaves only the symmetric difference of the two heaps (elements that are in either heap but not in both)
+    MaxHeap MaxHeap::operator/(const MaxHeap& other)
+    {
+        MaxHeap result;
+
+        // Add elements from the current heap that are not in the other heap
+        for (int value : impl->heap)
+        {
+            if (std::find(other.impl->heap.begin(), other.impl->heap.end(), value) == other.impl->heap.end())
+            {
+                result.insert(value);
+            }
+        }
+
+        // Add elements from the other heap that are not in the current heap
+        for (int value : other.impl->heap)
+        {
+            if (std::find(impl->heap.begin(), impl->heap.end(), value) == impl->heap.end())
+            {
+                result.insert(value);
+            }
+        }
+
+        return result;
+    }
+
+    // Leaves only the symmetric difference of the two heaps and modifies the current heap
+    MaxHeap& MaxHeap::operator/=(const MaxHeap& other)
+    {
+        // Temporary heap to hold the symmetric difference
+        std::vector<int> newHeap;
+
+        // Add elements from the current heap that are not in the other heap
+        for (int value : impl->heap)
+        {
+            if (std::find(other.impl->heap.begin(), other.impl->heap.end(), value) == other.impl->heap.end())
+            {
+                newHeap.push_back(value);
+            }
+        }
+
+        // Add elements from the other heap that are not in the current heap
+        for (int value : other.impl->heap)
+        {
+            if (std::find(impl->heap.begin(), impl->heap.end(), value) == impl->heap.end())
+            {
+                newHeap.push_back(value);
+            }
+        }
+
+        // Replace the current heap with the new heap containing only the symmetric difference
+        impl->heap = newHeap;
+        heapifyDown(0);  // Re-establish the heap property
+
+        return *this;
+    }
 }

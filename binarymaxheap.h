@@ -67,17 +67,17 @@ namespace ip2
         int size() const;
 
         // Arithmetic operators
-        MaxHeap operator+(const MaxHeap& other);    // Merge the two heaps
+        MaxHeap operator+(const MaxHeap& other);             // Union of the two Heaps
         MaxHeap& operator+=(const MaxHeap& other);
 
-        MaxHeap operator-(const MaxHeap& other);    // Remove first heaps elements that the second also has
+        MaxHeap operator-(const MaxHeap& other);              // Set difference of the two heaps
         MaxHeap& operator-=(const MaxHeap& other);
 
-        MaxHeap operator*(int scalar);              //Leaves only the intersection of the two heaps
-        MaxHeap& operator*=(int scalar);
+        MaxHeap operator*(const MaxHeap& other);              //Leaves only the intersection of the two heaps
+        MaxHeap& operator*=(const MaxHeap& other);
 
-        MaxHeap operator/(int scalar);              //Leaves only the set difference of the two heaps
-        MaxHeap& operator/=(int scalar);
+        MaxHeap operator/(const MaxHeap& other);              //Leaves only the symmetric difference of the two heaps
+        MaxHeap& operator/=(const MaxHeap& other);
 
         // Element operators
         MaxHeap& operator+(int value);  // Add a single element
