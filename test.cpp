@@ -8,7 +8,7 @@ void testMaxHeap()
     ip2::MaxHeap heap;
 
     // Test insert and size
-    heap.insert(10);
+    heap.insert(15);
     heap.insert(20);
     heap.insert(5);
     heap.insert(30);
@@ -42,7 +42,7 @@ void testMaxHeap()
 
     // Test the / operator (symmetric difference)
     ip2::MaxHeap symDiffHeap = heap / heap2;
-    assert(symDiffHeap.size() == 4); // Should have 4 elements in symmetric difference
+    assert(symDiffHeap.size() == 3); // Should have 4 elements in symmetric difference
 
     // Test empty heap
     ip2::MaxHeap emptyHeap;

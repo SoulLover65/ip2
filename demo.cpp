@@ -6,7 +6,7 @@ int main()
     try
     {
         ip2::MaxHeap heap1;
-        heap1.insert(10);
+        heap1.insert(15);
         heap1.insert(20);
         heap1.insert(5);
         heap1.insert(30);
@@ -27,15 +27,20 @@ int main()
         std::cout << "Heap 3 (Union): ";
         heap3.printHeap();
 
-        // Intersection of two heaps (heap1 * heap2)
-        ip2::MaxHeap heap4 = heap1 * heap2;
-        std::cout << "Heap 4 (Intersection): ";
+        // Difference of two heaps (heap1 - heap2)
+        ip2::MaxHeap heap4 = heap1 - heap2;
+        std::cout << "Heap 4 (Set difference): ";
         heap4.printHeap();
 
-        // Symmetric difference of two heaps (heap1 / heap2)
-        ip2::MaxHeap heap5 = heap1 / heap2;
-        std::cout << "Heap 5 (Symmetric Difference): ";
+        // Intersection of two heaps (heap1 * heap2)
+        ip2::MaxHeap heap5 = heap1 * heap2;
+        std::cout << "Heap 5 (Intersection): ";
         heap5.printHeap();
+
+        // Symmetric difference of two heaps (heap1 / heap2)
+        ip2::MaxHeap heap6 = heap1 / heap2;
+        std::cout << "Heap 6 (Symmetric Difference): ";
+        heap6.printHeap();
 
         // Test operators
         heap1 += heap2;

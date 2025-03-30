@@ -26,7 +26,7 @@ namespace ip2
     class MaxHeapException : public std::exception
     {
     public:
-        const char* what() const noexcept override
+        const char* what() const throw() // Use throw() instead of noexcept for compatibility
         {
             return "MaxHeapException: Invalid operation or state in the heap";
         }
