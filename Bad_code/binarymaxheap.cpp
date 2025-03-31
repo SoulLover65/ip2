@@ -333,6 +333,7 @@ namespace ip2
         if (!impl->heap.empty())
         {
             insert(impl->heap[0]);  // Insert the root element (maximum element) again
+            insert(impl->heap[0]);  // Insert the root element (maximum element) again
         }
         else
         {
