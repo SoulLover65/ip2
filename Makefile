@@ -6,6 +6,7 @@ SRC = binarymaxheap.cpp demo.cpp test.cpp
 OBJ = $(SRC:.cpp=.o)
 EXEC = demo
 testEXEC = test
+DELEXEC = demo.exe test.exe
 
 # Default target (build everything)
 all: build
@@ -39,4 +40,4 @@ test_build_run: test_build test_run
 
 # Clean
 clean:
-	rm -f $(OBJ) $(EXEC) $(testEXEC)
+	del -f $(OBJ) $(DELEXEC)
