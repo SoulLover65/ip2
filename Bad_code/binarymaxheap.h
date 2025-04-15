@@ -1,12 +1,12 @@
 //Makefile commands:
-// make — Builds everything
-// make build — Builds the main executable
-// make run — Runs the main executable
-// make build_run — Builds and runs the main executable
-// make test_build — Builds the test executable
-// make test_run — Runs the test executable
-// make test_build_run — Builds and runs the test executable
-// make clean — Cleans all generated files
+// make â€” Builds everything
+// make build â€” Builds the main executable
+// make run â€” Runs the main executable
+// make build_run â€” Builds and runs the main executable
+// make test_build â€” Builds the test executable
+// make test_run â€” Runs the test executable
+// make test_build_run â€” Builds and runs the test executable
+// make clean â€” Cleans all generated files
 
 
 #ifndef BINARYMAXHEAP_H_INCLUDED
@@ -33,12 +33,12 @@ namespace ip2
     {
     private:
         // Nested struct MaxHeapImpl (only data)
-        struct MaxHeapImpl
+        struct MAXHEAPIMPL
         {
             std::vector<int> heap;  // The heap stored as a vector
         };
 
-        MaxHeapImpl* impl;  // Pointer to Implementation
+        MAXHEAPIMPL* impl;  // Pointer to Implementation
 
         // Helper functions for heap operations
 
